@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'models.dart'; // Import your data models
+import 'models.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<Candidate> connectedCandidates = [
@@ -7,7 +7,6 @@ class HomeScreen extends StatelessWidget {
         name: 'John Doe',
         position: 'Software Developer',
         imageUrl: 'assets/images/john_doe.jpg'),
-    // Add more connected candidates here
   ];
 
   @override
