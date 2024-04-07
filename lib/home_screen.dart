@@ -11,21 +11,52 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreatePostScreen()),
+              );
+            },
+            tooltip: 'Create Post',
+          ),
+        ],
       ),
       body: Column(
         children: [
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              'Latest Posts',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueGrey),
+            ),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: connectedCandidatePosts.length,
               itemBuilder: (context, index) {
                 final post = connectedCandidatePosts[index];
                 return Card(
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                     leading: CircleAvatar(
+                      radius: 30,
                       backgroundImage: AssetImage(post.candidate.imageUrl),
                     ),
-                    title: Text(post.candidate.name),
-                    subtitle: Text(post.message),
+                    title: Text(post.candidate.name,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(post.message),
+                    ),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -42,11 +73,21 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.symmetric(vertical: 10),
-            color: Colors.blueGrey[100],
+            decoration: BoxDecoration(
+              color: Colors.blueGrey[100],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, -3),
+                ),
+              ],
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
+                ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -54,9 +95,14 @@ class HomeScreen extends StatelessWidget {
                           builder: (context) => CandidatesScreen()),
                     );
                   },
-                  child: Text('View Candidates'),
+                  icon: Icon(Icons.people),
+                  label: Text('Candidates'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
                 ),
-                ElevatedButton(
+                ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -64,22 +110,17 @@ class HomeScreen extends StatelessWidget {
                           builder: (context) => JobListingsScreen()),
                     );
                   },
-                  child: Text('View Job Listings'),
+                  icon: Icon(Icons.work),
+                  label: Text('Job Listings'),
+                  style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.green,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
                 ),
               ],
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CreatePostScreen()),
-          );
-        },
-        child: Icon(Icons.add),
-        tooltip: 'Create Post',
       ),
     );
   }
