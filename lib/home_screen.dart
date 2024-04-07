@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueGrey),
+                  color: Theme.of(context).primaryColor),
             ),
           ),
           Expanded(
@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                   icon: Icon(Icons.work),
                   label: Text('Job Listings'),
                   style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.green,
+                    backgroundColor: Colors.green,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   ),
                 ),
