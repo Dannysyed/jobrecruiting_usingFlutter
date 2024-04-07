@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
-import 'candidate_detail_screen.dart';
 import 'data.dart';
+import 'job_detail_screen.dart';
 
-class CandidatesScreen extends StatelessWidget {
+class JobListingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Candidates'),
+        title: Text('Job Listings'),
       ),
       body: ListView.builder(
-        itemCount: candidates.length,
+        itemCount: jobListings.length,
         itemBuilder: (context, index) {
-          final candidate = candidates[index];
+          final job = jobListings[index];
           return Card(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: AssetImage(candidate.imageUrl),
+                backgroundImage: AssetImage(job.logoUrl),
               ),
-              title: Text(candidate.name),
-              subtitle: Text(candidate.position),
+              title: Text(job.title),
+              subtitle: Text(job.company),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        CandidateDetailScreen(candidate: candidate),
+                    builder: (context) => JobDetailScreen(job: job),
                   ),
                 );
               },
