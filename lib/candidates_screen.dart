@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'models.dart';
+import 'data.dart';
+import 'candidate_detail_screen.dart';
 
 class CandidatesScreen extends StatelessWidget {
-  CandidatesScreen({super.key});
-
-  final List<Candidate> allCandidates = [
-    Candidate(
-        name: 'John Doe',
-        position: 'Software Developer',
-        imageUrl: 'assets/images/john_doe.jpg'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,15 +10,24 @@ class CandidatesScreen extends StatelessWidget {
         title: Text('Candidates'),
       ),
       body: ListView.builder(
-        itemCount: allCandidates.length,
+        itemCount: candidates.length,
         itemBuilder: (context, index) {
+          final candidate = candidates[index];
           return Card(
             child: ListTile(
-              leading: Image.asset(allCandidates[index].imageUrl),
-              title: Text(allCandidates[index].name),
-              subtitle: Text(allCandidates[index].position),
+              leading: CircleAvatar(
+                backgroundImage: AssetImage(candidate.imageUrl),
+              ),
+              title: Text(candidate.name),
+              subtitle: Text(candidate.position),
               onTap: () {
-                // Navigating to Candidate Detail Screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CandidateDetailScreen(candidate: candidate),
+                  ),
+                );
               },
             ),
           );
