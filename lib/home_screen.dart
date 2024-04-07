@@ -18,7 +18,11 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CreatePostScreen()),
-              );
+              ).then((value) {
+                if (value == true) {
+                  (context as Element).reassemble();
+                }
+              });
             },
             tooltip: 'Create Post',
           ),
@@ -37,38 +41,54 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: connectedCandidatePosts.length,
-              itemBuilder: (context, index) {
-                final post = connectedCandidatePosts[index];
-                return Card(
-                  elevation: 5,
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                    leading: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(post.candidate.imageUrl),
-                    ),
-                    title: Text(post.candidate.name,
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(post.message),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              CandidateDetailScreen(candidate: post.candidate),
-                        ),
-                      );
-                    },
-                  ),
-                );
+            child: RefreshIndicator(
+              onRefresh: () async {
+                (context as Element).reassemble();
               },
+              child: connectedCandidatePosts.isEmpty
+                  ? Center(child: Text('No posts to show'))
+                  : ListView.builder(
+                      itemCount: connectedCandidatePosts.length,
+                      itemBuilder: (context, index) {
+                        final post = connectedCandidatePosts[index];
+                        return Card(
+                          elevation: 5,
+                          margin:
+                              EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ListTile(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 12, horizontal: 16),
+                                leading: CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                      AssetImage(post.candidate.imageUrl),
+                                ),
+                                title: Text(post.candidate.name,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                subtitle: Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Text(post.message),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CandidateDetailScreen(
+                                              candidate: post.candidate),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
             ),
           ),
           Container(

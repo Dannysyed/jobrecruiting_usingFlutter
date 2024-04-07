@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jobrecruiting/models.dart';
 import 'data.dart';
+import 'models.dart';
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen({super.key});
   @override
-  State<CreatePostScreen> createState() {
-    return _CreatePostScreenState();
-  }
+  _CreatePostScreenState createState() => _CreatePostScreenState();
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
@@ -28,26 +25,22 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           description: _description,
         ));
       } else {
-        // For a regular post
         connectedCandidatePosts.add(Post(
           candidate: candidates[0],
           message: _description,
         ));
       }
 
-      // Clear the form
       _formKey.currentState!.reset();
       setState(() {
         _isJobListing = false;
       });
 
-      // Shows a success message
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Post created successfully!')),
+        SnackBar(content: Text('Post created successfully!')),
       );
 
-      // Navigating back to the previous screen
-      Navigator.pop(context);
+      Navigator.pop(context, true);
     }
   }
 
@@ -55,30 +48,30 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Post'),
+        title: Text('Create Post'),
       ),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Title'),
+                decoration: InputDecoration(labelText: 'Title'),
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter a title' : null,
                 onSaved: (value) => _title = value!,
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(labelText: 'Description'),
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter a description' : null,
                 onSaved: (value) => _description = value!,
                 maxLines: 3,
               ),
               SwitchListTile(
-                title: const Text('Is this a job listing?'),
+                title: Text('Is this a job listing?'),
                 value: _isJobListing,
                 onChanged: (bool value) {
                   setState(() {
@@ -88,7 +81,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               ),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: const Text('Create Post'),
+                child: Text('Create Post'),
               ),
             ],
           ),
