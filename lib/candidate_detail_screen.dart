@@ -10,18 +10,39 @@ class CandidateDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Candidate Details'),
+        title: const Text('Candidate Details'),
       ),
       body: Column(
         children: [
-          Image.asset(candidate.imageUrl),
-          Text(candidate.name),
-          Text(candidate.position),
+          const SizedBox(height: 20),
+          CircleAvatar(
+            backgroundImage: AssetImage(candidate.imageUrl),
+            radius: 50,
+          ),
+          const SizedBox(height: 20),
+          Text(
+            candidate.name,
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            candidate.position,
+            style: const TextStyle(fontSize: 18, color: Colors.grey),
+          ),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              'Short bio about the candidate. This can be a brief summary of their experience, skills, and interests.',
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // Handle connect action
+              print('Connected with ${candidate.name}');
             },
-            child: Text('Connect'),
+            child: const Text('Connect'),
           ),
         ],
       ),
