@@ -1,32 +1,19 @@
 import 'package:flutter/material.dart';
-import 'models.dart';
+import 'home_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  final List<Candidate> connectedCandidates = [
-    Candidate(
-        name: 'John Doe',
-        position: 'Software Developer',
-        imageUrl: 'assets/images/john_doe.jpg'),
-  ];
+void main() {
+  runApp(MyApp());
+}
 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
+    return MaterialApp(
+      title: 'Recruiting App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      body: ListView.builder(
-        itemCount: connectedCandidates.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: Image.asset(connectedCandidates[index].imageUrl),
-              title: Text(connectedCandidates[index].name),
-              subtitle: Text(connectedCandidates[index].position),
-            ),
-          );
-        },
-      ),
+      home: HomeScreen(),
     );
   }
 }
