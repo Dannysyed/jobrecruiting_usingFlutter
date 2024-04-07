@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 import 'models.dart';
 
-class CandidateDetailScreen extends StatelessWidget {
+class CandidateDetailScreen extends StatefulWidget {
   final Candidate candidate;
 
   const CandidateDetailScreen({required this.candidate, super.key});
+
+  @override
+  State<CandidateDetailScreen> createState() => _CandidateDetailScreenState();
+}
+
+class _CandidateDetailScreenState extends State<CandidateDetailScreen> {
+  bool _isConnected = false;
+
+  void _connect() {
+    setState(() {
+      _isConnected = true;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Connected with ${widget.candidate.name}')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +32,16 @@ class CandidateDetailScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           CircleAvatar(
-            backgroundImage: AssetImage(candidate.imageUrl),
+            backgroundImage: AssetImage(widget.candidate.imageUrl),
             radius: 50,
           ),
           const SizedBox(height: 20),
           Text(
-            candidate.name,
+            widget.candidate.name,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           Text(
-            candidate.position,
+            widget.candidate.position,
             style: const TextStyle(fontSize: 18, color: Colors.grey),
           ),
           const SizedBox(height: 20),
@@ -38,11 +54,8 @@ class CandidateDetailScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {
-              // Handle connect action
-              print('Connected with ${candidate.name}');
-            },
-            child: const Text('Connect'),
+            onPressed: _isConnected ? null : _connect,
+            child: Text(_isConnected ? 'Connected' : 'Connect'),
           ),
         ],
       ),

@@ -5,11 +5,13 @@ final List<Candidate> candidates = [
     name: 'John Doe',
     position: 'Software Developer',
     imageUrl: 'assets/images/candidate1.jpg',
+    isConnected: true,
   ),
   Candidate(
     name: 'Jane Doe',
     position: 'Product Manager',
     imageUrl: 'assets/images/candidate2.jpg',
+    isConnected: false,
   ),
 ];
 

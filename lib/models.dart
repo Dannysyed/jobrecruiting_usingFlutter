@@ -2,9 +2,14 @@ class Candidate {
   final String name;
   final String position;
   final String imageUrl;
+  bool isConnected;
 
-  Candidate(
-      {required this.name, required this.position, required this.imageUrl});
+  Candidate({
+    required this.name,
+    required this.position,
+    required this.imageUrl,
+    this.isConnected = false,
+  });
 }
 
 class Post {
