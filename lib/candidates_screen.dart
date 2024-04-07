@@ -3,11 +3,12 @@ import 'candidate_detail_screen.dart';
 import 'data.dart';
 
 class CandidatesScreen extends StatelessWidget {
+  const CandidatesScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Candidates'),
+        title: const Text('Candidates'),
       ),
       body: ListView.builder(
         itemCount: candidates.length,
