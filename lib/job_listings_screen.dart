@@ -3,11 +3,12 @@ import 'data.dart';
 import 'job_detail_screen.dart';
 
 class JobListingsScreen extends StatelessWidget {
+  const JobListingsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Job Listings'),
+        title: const Text('Job Listings'),
       ),
       body: ListView.builder(
         itemCount: jobListings.length,
