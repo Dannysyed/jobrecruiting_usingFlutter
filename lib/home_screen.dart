@@ -6,6 +6,7 @@ import 'job_listings_screen.dart';
 import 'candidates_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +54,8 @@ class HomeScreen extends StatelessWidget {
                         final post = connectedCandidatePosts[index];
                         return Card(
                           elevation: 5,
-                          margin:
-                              EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -100,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(0, -3),
+                  offset: const Offset(0, -3),
                 ),
               ],
             ),
@@ -119,7 +120,8 @@ class HomeScreen extends StatelessWidget {
                   label: const Text('Candidates'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                   ),
                 ),
                 ElevatedButton.icon(
