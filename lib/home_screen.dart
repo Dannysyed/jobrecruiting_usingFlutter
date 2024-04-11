@@ -10,10 +10,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () {
               Navigator.push(
                 context,
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Text(
               'Latest Posts',
               style: TextStyle(
@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                 (context as Element).reassemble();
               },
               child: connectedCandidatePosts.isEmpty
-                  ? Center(child: Text('No posts to show'))
+                  ? const Center(child: Text('No posts to show'))
                   : ListView.builder(
                       itemCount: connectedCandidatePosts.length,
                       itemBuilder: (context, index) {
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ListTile(
-                                contentPadding: EdgeInsets.symmetric(
+                                contentPadding: const EdgeInsets.symmetric(
                                     vertical: 12, horizontal: 16),
                                 leading: CircleAvatar(
                                   radius: 30,
@@ -67,8 +67,8 @@ class HomeScreen extends StatelessWidget {
                                       AssetImage(post.candidate.imageUrl),
                                 ),
                                 title: Text(post.candidate.name,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
                                 subtitle: Padding(
                                   padding: const EdgeInsets.only(top: 8.0),
                                   child: Text(post.message),
@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
               color: Colors.blueGrey[100],
               boxShadow: [
@@ -115,8 +115,8 @@ class HomeScreen extends StatelessWidget {
                           builder: (context) => CandidatesScreen()),
                     );
                   },
-                  icon: Icon(Icons.people),
-                  label: Text('Candidates'),
+                  icon: const Icon(Icons.people),
+                  label: const Text('Candidates'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -130,11 +130,12 @@ class HomeScreen extends StatelessWidget {
                           builder: (context) => JobListingsScreen()),
                     );
                   },
-                  icon: Icon(Icons.work),
-                  label: Text('Job Listings'),
+                  icon: const Icon(Icons.work),
+                  label: const Text('Job Listings'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                   ),
                 ),
               ],
