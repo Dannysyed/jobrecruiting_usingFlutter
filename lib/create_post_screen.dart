@@ -3,8 +3,12 @@ import 'data.dart';
 import 'models.dart';
 
 class CreatePostScreen extends StatefulWidget {
+  const CreatePostScreen({super.key});
+  //  Creation of the stateful
   @override
-  _CreatePostScreenState createState() => _CreatePostScreenState();
+  State<CreatePostScreen> createState() {
+    return _CreatePostScreenState();
+  }
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
@@ -48,30 +52,30 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Post'),
+        title: const Text('Create Post'),
       ),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'),
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter a title' : null,
                 onSaved: (value) => _title = value!,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(labelText: 'Description'),
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter a description' : null,
                 onSaved: (value) => _description = value!,
                 maxLines: 3,
               ),
               SwitchListTile(
-                title: Text('Is this a job listing?'),
+                title: const Text('Is this a job listing?'),
                 value: _isJobListing,
                 onChanged: (bool value) {
                   setState(() {
@@ -81,7 +85,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               ),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('Create Post'),
+                child: const Text('Create Post'),
               ),
             ],
           ),
