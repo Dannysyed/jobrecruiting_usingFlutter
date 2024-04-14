@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.blueGrey[100],
+        color: const Color.fromARGB(255, 207, 208, 220),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -128,13 +128,14 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CandidatesScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const CandidatesScreen()),
               );
             },
             icon: const Icon(Icons.people),
             label: const Text('Candidates'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
           ),
@@ -142,13 +143,14 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => JobListingsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const JobListingsScreen()),
               );
             },
             icon: const Icon(Icons.work),
             label: const Text('Job Listings'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             ),
           ),
