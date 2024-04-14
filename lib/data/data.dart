@@ -4,8 +4,8 @@ final List<Candidate> candidates = [
   Candidate(
     name: 'Daniyal Mahmood',
     position: 'Software Developer',
-    imageUrl: 'assets/images/candidate1.jpg',
-    isConnected: true,
+    imageUrl: 'assets/images/candidate3.jpg',
+    isConnected: false,
   ),
   Candidate(
     name: 'Meet Shah',
@@ -29,7 +29,7 @@ final List<Candidate> candidates = [
 
 final List<Post> connectedCandidatePosts = [
   Post(
-    candidate: candidates[0],
+    candidate: candidates[2],
     message: 'Excited to share my latest project!',
   ),
   Post(
