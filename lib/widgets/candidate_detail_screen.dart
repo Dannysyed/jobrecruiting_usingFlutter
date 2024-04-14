@@ -3,10 +3,7 @@ import '../models/models.dart';
 
 class CandidateDetailScreen extends StatefulWidget {
   final Candidate candidate;
-
-  const CandidateDetailScreen({required this.candidate, Key? key})
-      : super(key: key);
-
+  const CandidateDetailScreen({required this.candidate, super.key});
   @override
   State<CandidateDetailScreen> createState() => _CandidateDetailScreenState();
 }
