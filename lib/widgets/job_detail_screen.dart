@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 
+// Global variable is stored here to make sure app remember applied job titles
+Set<String> appliedJobs = {};
+
 class JobDetailScreen extends StatefulWidget {
-  const JobDetailScreen({Key? key, required this.job}) : super(key: key);
+  const JobDetailScreen({super.key, required this.job});
 
   final JobListing job;
 
   @override
-  _JobDetailScreenState createState() => _JobDetailScreenState();
+  State<JobDetailScreen> createState() {
+    return _JobDetailScreenState();
+  }
 }
 
 class _JobDetailScreenState extends State<JobDetailScreen> {
-  Set<String> appliedJobs = {}; // Set to store titles of applied jobs
-
   @override
   Widget build(BuildContext context) {
     final bool isApplied = appliedJobs.contains(widget.job.title);
@@ -53,18 +56,17 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                             'Are you sure you want to apply for ${widget.job.title}?'),
                         actions: <Widget>[
                           TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
                             onPressed: () {
                               setState(() {
-                                appliedJobs.add(widget
-                                    .job.title); // Mark job title as applied
+                                appliedJobs.add(widget.job.title);
                               });
                               Navigator.of(context).pop();
                             },
                             child: const Text('Apply'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: const Text('Cancel'),
                           ),
                         ],
                       );
