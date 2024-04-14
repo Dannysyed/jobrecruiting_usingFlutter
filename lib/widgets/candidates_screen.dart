@@ -2,8 +2,34 @@ import 'package:flutter/material.dart';
 import 'candidate_detail_screen.dart';
 import '../data/data.dart';
 
-class CandidatesScreen extends StatelessWidget {
-  const CandidatesScreen({Key? key}) : super(key: key);
+class CandidatesScreen extends StatefulWidget {
+  const CandidatesScreen({super.key});
+
+  @override
+  State<CandidatesScreen> createState() {
+    return _CandidatesScreenState();
+  }
+}
+
+class _CandidatesScreenState extends State<CandidatesScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500));
+    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,39 +40,53 @@ class CandidatesScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: candidates.length,
         itemBuilder: (context, index) {
+          _animationController.reset();
+          _animationController.forward();
           final candidate = candidates[index];
-          return AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeIn,
-            margin: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 3,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(candidate.imageUrl),
-              ),
-              title: Text(candidate.name),
-              subtitle: Text(candidate.position),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        CandidateDetailScreen(candidate: candidate),
+          return AnimatedBuilder(
+            animation: _animationController,
+            builder: (context, child) {
+              return FadeTransition(
+                opacity: _animation,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                  child: Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 16,
+                      ),
+                      leading: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage(candidate.imageUrl),
+                      ),
+                      title: Text(
+                        candidate.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(candidate.position),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CandidateDetailScreen(
+                              candidate: candidate,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           );
         },
       ),
