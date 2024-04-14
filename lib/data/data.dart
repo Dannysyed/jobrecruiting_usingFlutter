@@ -11,24 +11,18 @@ final List<Candidate> candidates = [
     name: 'Meet Shah',
     position: 'Product Manager',
     imageUrl: 'assets/images/candidate2.jpg',
-    isConnected: false,
+    isConnected: true,
   ),
   Candidate(
-    name: 'Pavan Pater',
+    name: 'Pavan Patel',
     position: 'Software Developer',
     imageUrl: 'assets/images/candidate1.jpg',
     isConnected: true,
   ),
   Candidate(
-    name: 'Parth Pater',
+    name: 'Parth Prajapathi',
     position: 'Product Manager',
     imageUrl: 'assets/images/candidate2.jpg',
-    isConnected: false,
-  ),
-  Candidate(
-    name: 'Alice Smith',
-    position: 'UI/UX Designer',
-    imageUrl: 'assets/images/candidate3.jpg',
     isConnected: false,
   ),
 ];
@@ -47,23 +41,21 @@ final List<Post> connectedCandidatePosts = [
 final List<JobListing> jobListings = [
   JobListing(
     title: 'Senior Software Engineer',
-    company: 'Tech Corp',
+    company: 'Nasa',
     logoUrl: 'assets/images/tech_corp_logo.jpg',
     description:
         'We are looking for a Senior Software Engineer to join our team.',
   ),
   JobListing(
-    title: 'Senior Software Engineer',
+    title: 'Project Manager',
     company: 'Tech Corp',
     logoUrl: 'assets/images/tech_corp_logo.jpg',
-    description:
-        'We are looking for a Senior Software Engineer to join our team.',
+    description: 'We are looking for a Project Mangager to join our team.',
   ),
   JobListing(
-    title: 'Senior Software Engineer',
-    company: 'Tech Corp',
+    title: 'Tester',
+    company: 'Tech Canada',
     logoUrl: 'assets/images/tech_corp_logo.jpg',
-    description:
-        'We are looking for a Senior Software Engineer to join our team.',
+    description: 'We are looking for a tester to join our team.',
   ),
 ];
