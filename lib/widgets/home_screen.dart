@@ -6,15 +6,14 @@ import 'job_listings_screen.dart';
 import 'candidates_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
+  const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   Future<void> _refreshPosts() async {
-    // Simulate a delay to show the refresh indicator
+    // Simulating here a delay to show the refresh indicator
     await Future.delayed(const Duration(seconds: 1));
     setState(() {});
   }
@@ -30,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () async {
               await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CreatePostScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const CreatePostScreen()),
               );
               setState(() {});
             },
@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildPostsList() {
     return connectedCandidatePosts.isEmpty
-        ? Center(child: Text('No posts to show'))
+        ? const Center(child: Text('No posts to show'))
         : ListView.builder(
             itemCount: connectedCandidatePosts.length,
             itemBuilder: (context, index) {
