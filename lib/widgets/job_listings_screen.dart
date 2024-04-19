@@ -3,7 +3,7 @@ import '../data/data.dart';
 import 'job_detail_screen.dart';
 
 class JobListingsScreen extends StatelessWidget {
-  const JobListingsScreen({Key? key}) : super(key: key);
+  const JobListingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,17 +11,30 @@ class JobListingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Job Listings'),
       ),
-      body: ListView.builder(
+      body: ListView.separated(
         itemCount: jobListings.length,
+        separatorBuilder: (context, index) => Divider(
+          height: 0,
+          color: Colors.grey[300],
+          thickness: 1,
+          indent: 16,
+          endIndent: 16,
+        ),
         itemBuilder: (context, index) {
           final job = jobListings[index];
-          return Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Card(
-              elevation: 4.0,
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => JobDetailScreen(job: job),
+                ),
+              );
+            },
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
               child: ListTile(
-                contentPadding: const EdgeInsets.all(16.0),
                 leading: CircleAvatar(
                   radius: 30.0,
                   backgroundImage: AssetImage(job.logoUrl),
@@ -30,17 +43,15 @@ class JobListingsScreen extends StatelessWidget {
                   job.title,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
                   ),
                 ),
                 subtitle: Text(job.company),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => JobDetailScreen(job: job),
-                    ),
-                  );
-                },
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16.0,
+                  color: Colors.grey,
+                ),
               ),
             ),
           );
