@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'create_post_screen.dart';
 import '../data/data.dart';
 import 'candidate_detail_screen.dart';
@@ -7,6 +8,7 @@ import 'candidates_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -23,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        backgroundColor: Theme.of(context).primaryColor, // Set app bar color
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -30,7 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const CreatePostScreen()),
+                  builder: (context) => const CreatePostScreen(),
+                ),
               );
               setState(() {});
             },
@@ -45,11 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(16),
             child: Text(
               'Latest Posts',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
-              ),
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
           Expanded(
@@ -67,43 +67,75 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildPostsList() {
     return connectedCandidatePosts.isEmpty
         ? const Center(child: Text('No posts to show'))
-        : ListView.builder(
-            itemCount: connectedCandidatePosts.length,
-            itemBuilder: (context, index) {
-              final post = connectedCandidatePosts[index];
-              return Card(
-                elevation: 5,
-                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
-                  ),
-                  leading: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: AssetImage(post.candidate.imageUrl),
-                  ),
-                  title: Text(
-                    post.candidate.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(post.message),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CandidateDetailScreen(
-                          candidate: post.candidate,
+        : SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height -
+                      200, // Adjust height as needed
+                  child: ListView.builder(
+                    itemCount: connectedCandidatePosts.length,
+                    itemBuilder: (context, index) {
+                      final post = connectedCandidatePosts[index];
+                      return Card(
+                        elevation: 5,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 16),
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 16,
+                          ),
+                          leading: CircleAvatar(
+                            radius: 30,
+                            backgroundImage:
+                                AssetImage(post.candidate.imageUrl),
+                          ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                post.candidate.name,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          subtitle: Text(post.message),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.thumb_up),
+                                onPressed: () {
+                                  // Implement like functionality
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.comment),
+                                onPressed: () {
+                                  // Implement comment functionality
+                                },
+                              ),
+                            ],
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CandidateDetailScreen(
+                                  candidate: post.candidate,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              );
-            },
+              ],
+            ),
           );
   }
 
@@ -129,7 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const CandidatesScreen()),
+                  builder: (context) => const CandidatesScreen(),
+                ),
               );
             },
             icon: const Icon(Icons.people),
@@ -144,7 +177,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const JobListingsScreen()),
+                  builder: (context) => const JobListingsScreen(),
+                ),
               );
             },
             icon: const Icon(Icons.work),
